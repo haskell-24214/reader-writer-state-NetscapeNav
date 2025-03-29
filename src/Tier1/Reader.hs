@@ -4,7 +4,7 @@ import Control.Monad.Reader
 import Tier0.Reader (Environment (..), EnvironmentM)
 
 cd :: String -> EnvironmentM a -> EnvironmentM a
-cd dir = undefined
+cd dir = local $ \env -> env { currentDir = currentDir env ++ "/" ++ dir }
 
 su :: EnvironmentM a -> EnvironmentM a
-su env = undefined
+su = local $ \env -> env { isSuperUser = True }
